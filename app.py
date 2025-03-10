@@ -86,7 +86,7 @@ def player_stats(player_id):
     )
     reboundsGraphJSON = reboundsFig.to_html(full_html=False)
 
-    assistsFig = px.bar(last10Games, x="Games", y="REB", title="Assists in last 10 Games", text_auto='.2s', barmode="group")
+    assistsFig = px.bar(last10Games, x="Games", y="AST", title="Assists in last 10 Games", text_auto='.2s', barmode="group")
     assistsFig.update_layout(
         xaxis=dict(
             tickmode='array',
@@ -96,12 +96,24 @@ def player_stats(player_id):
         )
     )
     assistsGraphJSON = assistsFig.to_html(full_html=False)
+
+    shootPercentFig = px.bar(last10Games, x="Games", y="FG_PCT", title="Shooting Percentage in last 10 Games", text_auto='.3s', barmode="group")
+    shootPercentFig.update_layout(
+        xaxis=dict(
+            tickmode='array',
+            tickvals=list(range(1, len(last10Games)+1)),
+            ticktext=[f"{matchups[i]}<br>{dates[i]}" for i in range(len(matchups))],
+            tickangle = 0
+        )
+    )
+    shootPercentGraphJSON = shootPercentFig.to_html(full_html=False)
     return render_template("player_stats.html", 
                            player=player,
                            table=table,
                            pointsGraphJSON=pointsGraphJSON,
                            reboundsGraphJSON=reboundsGraphJSON,
                            assistsGraphJSON=assistsGraphJSON,
+                           shootPercentGraphJSON=shootPercentGraphJSON,
                            avgPoints=avgPoints,
                            avgRebounds=avgRebounds,
                            avgAssists=avgAssists)
