@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Player Stats - {{ name }}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Stats for {{ name | safe }}</h1>
+  <div>
+    {{ table | safe }}
+  </div>
+  <div>
+    <h1>Season Averages</h1>
+    <ul class="list group mb-4">
+        <li class="list-group-item">Average Points: {{ avgPoints | round(2) }}</li>
+        <li class="list-group-item">Average Rebounds: {{ avgRebounds | round(2) }}</li>
+        <li class="list-group-item">Average Assists: {{ avgAssists | round(2) }}</li>
+    </ul>
+  <div class="container mt-4">
+    <h1>PTS</h1>
+    <div>
+      {{ pointsGraphJSON | safe }}
+    </div>
+  </div>
+  <div class="container mt-4">
+    <h1>REB</h1>
+    <div>
+      {{ reboundsGraphJSON | safe }}
+    </div>
+  </div>
+  <div class="container mt-4">
+    <h1>AST</h1>
+    <div>
+      {{ assistsGraphJSON | safe }}
+    </div>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Back to Search</a>
+</div>
+</body>
+</html>
