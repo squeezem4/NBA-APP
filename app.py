@@ -5,6 +5,7 @@ from nba_api.stats.endpoints import Scoreboard
 from datetime import datetime, timezone
 from dateutil import parser
 import plotly.express as px
+import math
 
 app = Flask(__name__)
 
@@ -55,7 +56,6 @@ def player_stats(player_id):
     table = stats.to_html(classes="table table-striped" , index=False) if hasattr(stats, "to_html") else stats
     #last_10_table = last10Games.to_html(classes="table table-striped", index=False) if hasattr(last10Games, "to_html") else last10Games
     avgPoints, avgRebounds, avgAssists = player_averages(player_id)
-
     matchups = last10Games.apply(lambda row: f"{row['MATCHUP']}", axis=1).tolist()
     dates = last10Games.apply(lambda row: f"{row['GAME_DATE']}", axis=1).tolist()
     for i in range(len(matchups)):
@@ -96,8 +96,7 @@ def player_stats(player_id):
         )
     )
     assistsGraphJSON = assistsFig.to_html(full_html=False)
-
-    shootPercentFig = px.bar(last10Games, x="Games", y="FG_PCT", title="Shooting Percentage in last 10 Games", text_auto='.3s', barmode="group")
+    shootPercentFig = px.bar(last10Games, x="Games", y="FG_PCT", title="Shooting Percentage in last 10 Games", text_auto='.2%', barmode="group")
     shootPercentFig.update_layout(
         xaxis=dict(
             tickmode='array',
