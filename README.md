@@ -1,4 +1,4 @@
-# NBA Player Stats Web App (WIP)
+# NBA Player Stats Web App
 
 **This project is currently under active development. Features and functionality are still being built and refined. Stay tuned!**
 
@@ -24,4 +24,4 @@ More features are on the way, including:
 - Pandas
 - Plotly Express
 - Bootstrap
-- HTML/CSS (Jinja templates)
+- HTML/CSS
